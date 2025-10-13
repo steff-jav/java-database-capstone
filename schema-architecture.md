@@ -10,10 +10,4 @@ Numbered flow of data and control:
 4. The service layer, which contains the core business logic, calls the data access layer (often using a repository pattern) to perform database operations, such as creating, reading, updating, or deleting data (CRUD operations).
 5. The data access or repository layer executes the necessary commands to interact with the database.
 6. The database executes the requested operation (e.g., a SQL query).
-7. The database returns the result of the operation (the requested data) back to the repository.
-8. The repository returns the retrieved data to the service layer.
-9. The service performs any remaining business logic, then passes the data back to the controller.
-10. Controller Prepares and Renders View: The controller processes the data received from the service layer.
-11. For a Thymeleaf controller: It populates a model with the data and selects the appropriate view (HTML template) to render.
-12. For a REST controller: It formats the data, typically into a JSON or XML payload, and includes the appropriate HTTP status code.
-13. Response Sent to User: The server sends the rendered HTML page (for Thymeleaf) or the data payload (for REST) back to the user's browser, completing the cycle. 
+7. The database returns the result of the operation (the requested data) back to the repository. The repository returns the retrieved data to the service layer. The service performs any remaining business logic, then passes the data back to the controller. Controller Prepares and Renders View: The controller processes the data received from the service layer. For a Thymeleaf controller: It populates a model with the data and selects the appropriate view (HTML template) to render. For a REST controller: It formats the data, typically into a JSON or XML payload, and includes the appropriate HTTP status code. Response Sent to User: The server sends the rendered HTML page (for Thymeleaf) or the data payload (for REST) back to the user's browser, completing the cycle.
