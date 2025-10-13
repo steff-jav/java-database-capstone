@@ -1,11 +1,87 @@
 package com.project.back_end.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import jakarta.persistence.*;
+
+@Entity
 public class Appointment {
 
   // @Entity annotation:
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
 //    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	@ManyToOne
+	@NotNull(message="select a doctor")
+	private Doctor doctor;
+	@ManyToOne
+	@NotNull(message="patient could not be null")
+	private Patient patient;
+	@NotNull(message="status cannot be empty")
+    //0 for Scheduled, 1 for Completed) (required)
+	private int status;
+	@Future(message = "Appointment time must be in the future")
+	private LocalDateTime appointmentTime;
+	
+	@Transient
+	private LocalDateTime getEndTime() {
+	 return appointmentTime.plusHours(1);	
+	}
+    @Transient
+	private LocalDate getAppointmentDate() {
+		return appointmentTime.toLocalDate();
+	}
+    @Transient
+	private LocalTime getAppointmentTimeOnly() {
+		return appointmentTime.toLocalTime();
+	}
+	public Appointment() {
+		
+	}
+	public Appointment(long id, Doctor doctor, Patient patient, int status, LocalDateTime appointmentTime) {
+		this.id = id;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.status = status;
+		this.appointmentTime = appointmentTime;
+	}
+	public long getId() {
+		return id;
+	}
+	public Doctor getDoctor() {
+		return doctor;
+	}
+	public Patient getPatient() {
+		return patient;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public LocalDateTime getAppointmentTime() {
+		return appointmentTime;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public void setAppointmentTime(LocalDateTime appointmentTime) {
+		this.appointmentTime = appointmentTime;
+	}
+	
+	
+	
 // 1. 'id' field:
 //    - Type: private Long
 //    - Description:

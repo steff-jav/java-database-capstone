@@ -1,10 +1,64 @@
 package com.project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.*;
+
+@Entity
 public class Patient {
 // @Entity annotation:
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
 //    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	@NotNull(message="name field cannot be empty" )
+	@Size(min=3,max=100)
+	private String name;
+	@NotNull(message=" email cannot be empty")
+	@Email
+	private String email;
+	@NotNull(message=" password cannot be empty")
+	@JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
+	private String password;
+	@NotNull(message=" phone cannot be empty")
+	@Pattern(regexp="^[0-9]{10}$",message="phone number must be 10 digits")
+	private String phone;
+	@NotNull(message=" address cannot be empty")
+	@Size(max=255)
+	private String address;
+	public Long getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 // 1. 'id' field:
 //    - Type: private Long
 //    - Description:
