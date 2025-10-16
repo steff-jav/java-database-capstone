@@ -2,21 +2,17 @@
 
 /* 
 Global Reset (`*`)
+*/
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
 
-* Purpose: Ensure consistent layout across all browsers.
-* Properties:
-
-  * `margin: 0` — removes default outer spacing from all elements.
-  * `padding: 0` — removes default inner spacing.
-  * `box-sizing: border-box` — ensures padding and borders are included within the total width/height of elements.
-
-Base HTML & Body (`html, body`)
-
-* Purpose: Establish a full-height layout and apply a standard font across the page.
-* Properties:
-
-  * `height: 100%` — allows containers to stretch to the full viewport height.
-  * `font-family: Arial, sans-serif` — applies a clean, readable sans-serif font.
+html, body{ 
+    height: 100%; 
+    font-family: Arial, sans-serif; 
+}
+.wrapper
 
 Main Layout Wrapper (`.wrapper`)
 
