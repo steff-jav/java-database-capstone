@@ -1,65 +1,78 @@
-html
-<!DOCTYPE html>
-<html lang="en">
+<!-- adminDashboard.html -->
+
+<!--
+This file creates the Admin Dashboard interface for managing doctor-related data 
+with search, filter, and modal functionality.
+--><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Character Encoding and Viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page Title -->
     <title>Admin Dashboard</title>
-
-    <!-- CSS Links -->
-    <link rel="stylesheet" href="./assets/css/adminDashboard.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-
-    <!-- Utility and Rendering JavaScript -->
-    <script src="./js/render.js" defer></script>
-    <script src="./js/util.js" defer></script>
-
-    <!-- Component JavaScript -->
-    <script src="./js/components/header.js" defer></script>
-    <script src="./js/components/footer.js" defer></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    
+    <!-- JavaScript Dependencies (loaded with defer) -->
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/util.js}" defer></script>
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
 </head>
-<body>
+<body onload="renderContent()">
+    <!-- Main Content Container -->
     <div class="container">
+        <!-- Wrapper for Page Content -->
         <div class="wrapper">
             <!-- Header Placeholder -->
             <div id="header"></div>
-
+            
+            <!-- Main Dashboard Section -->
             <main class="main-content">
                 <!-- Search Bar -->
-                <input type="text" id="searchBar" placeholder="search by doctor name" />
-
-                <!-- Filter Section -->
-                <div class="filter-section">
-                    <select id="sortByTime">
-                        <option value="">Sort by Time</option>
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
+                <input type="text" id="searchBar" class="searchBar" placeholder="Search Bar for custom output" />
+                
+                <!-- Filter Dropdowns -->
+                <div class="filter-controls">
+                    <select id="timeFilter">
+                        <option value="">Filter by Time (AM/PM)</option>
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
                     </select>
-                    <select id="filterBySpecialty">
+                    <select id="specialtyFilter">
                         <option value="">Filter by Specialty</option>
-                        <!-- Options will be dynamically populated -->
+                        <option value="Cardiologist">Cardiologist</option>
+                        <option value="Dentist">Dentist</option>
+                        <!-- Other specialty options can be dynamically added -->
                     </select>
                 </div>
-
-                <!-- Content Area for Doctor Cards -->
+                
+                <!-- Content Display Area -->
                 <div id="content"></div>
             </main>
-
+            
             <!-- Footer Placeholder -->
             <div id="footer"></div>
         </div>
     </div>
-
-    <!-- Modal for Adding Doctor -->
+    
+    <!-- Modal Structure (Hidden by Default) -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
             <div id="modal-body"></div>
         </div>
     </div>
-
-    <!-- Admin Dashboard Service and Doctor Card Component JavaScript -->
-    <script type="module" src="../js/services/adminDashboard.js" defer></script>
-    <script type="module" src="../js/components/doctorCard.js" defer></script>
+    
+    <!-- Page-Specific JavaScript Modules (loaded with defer) -->
+    <script type="module" th:src="@{/js/services/adminDashboard.js}" defer></script>
+    <script type="module" th:src="@{/js/components/doctorCard.js}" defer></script>
 </body>
 </html>
